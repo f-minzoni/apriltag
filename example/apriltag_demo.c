@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
             printf("\"hamming\" parameter is out-of-range.\n");
             exit(-1);
         case ENOMEM:
-            printf("Unable to add family to detector due to insufficient memory to allocate the tag-family decoder. Try reducing \"hamming\" from %d or choose an alternative tag family.\n", getopt_get_int(getopt, "hamming"));
+            printf("Unable to add family to  due to insufficient memory to allocate the tag-family decoder. Try reducing \"hamming\" from %d or choose an alternative tag family.\n", getopt_get_int(getopt, "hamming"));
             exit(-1);
     }
 
@@ -200,6 +200,9 @@ int main(int argc, char *argv[])
             }
 
             printf("image: %s %dx%d\n", path, im->width, im->height);
+
+            int *id = apriltag_detector_detect_first_id(td, im);
+            printf("first detection id is: %d", *id);
 
             zarray_t *detections = apriltag_detector_detect(td, im);
 

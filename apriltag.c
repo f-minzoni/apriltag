@@ -999,6 +999,18 @@ static int prefer_smaller(int pref, double q0, double q1)
     return 0;
 }
 
+int *apriltag_detector_detect_first_id(apriltag_detector_t *td, image_u8_t *im_orig)
+{
+  zarray_t *detections = apriltag_detector_detect(td, im_orig);
+  if (zarray_size(detections) > 0) {
+    apriltag_detection_t *det;
+    zarray_get(detections, 0, &det);
+    return &det->id;
+  }
+  apriltag_detections_destroy(detections);
+  return 0;
+}
+
 zarray_t *apriltag_detector_detect(apriltag_detector_t *td, image_u8_t *im_orig)
 {
     if (zarray_size(td->tag_families) == 0) {
