@@ -201,9 +201,12 @@ int main(int argc, char *argv[])
 
             printf("image: %s %dx%d\n", path, im->width, im->height);
 
-            int *id = apriltag_detector_detect_first_id(td, im);
-            printf("first detection id is: %d", *id);
+            int id = apriltag_detector_detect_id(td, im);
+            printf("first detection id is: %d\n", id);
 
+            int *ids = apriltag_detector_detect_ids(td, im);
+	    printf("first detections id is: %d\n", ids[0]); 
+	    
             zarray_t *detections = apriltag_detector_detect(td, im);
 
             if (errno == EAGAIN) {
