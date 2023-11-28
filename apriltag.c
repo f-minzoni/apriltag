@@ -1017,11 +1017,11 @@ int* apriltag_detector_detect_ids(apriltag_detector_t *td, image_u8_t *im_orig) 
   int ids[size];
   for (int i = 0; i < size; i++) {
     apriltag_detection_t *det;
-    zarray_get(detections, 0, &det);
+    zarray_get(detections, i, &det);
     ids[i] = det->id;
   }
   apriltag_detections_destroy(detections);
-  return ids;
+  return &ids;
 }
 
 zarray_t *apriltag_detector_detect(apriltag_detector_t *td, image_u8_t *im_orig)
